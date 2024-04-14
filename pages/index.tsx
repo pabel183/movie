@@ -27,6 +27,39 @@ export default function Home() {
   return (
     <>
       <Navbar/>
+      <div className="bg-gray-400">
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+        <div className="h-96"></div>
+      </div>
     </>
   );
 }
