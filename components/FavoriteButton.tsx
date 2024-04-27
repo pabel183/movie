@@ -35,7 +35,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
             favoriteIds:updatedFavorites
         });
         muteFavorites();
-    },[movieId,currentUser,mutate,muteFavorites]);
+    },[movieId,currentUser,mutate,muteFavorites,isFavorite]);
 
     const Icon=isFavorite?AiOutlineCheck:AiOutlinePlus;
     return (
