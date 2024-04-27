@@ -1,6 +1,8 @@
 import { BsFillPlayFill } from "react-icons/bs";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/navigation";
+import useInfoModel from "@/hooks/useInfoModel";
+import { BiChevronDown } from "react-icons/bi";
 
 interface MovieCardProps {
     data: Record<string, any>,
@@ -9,6 +11,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
     data
 }) => {
     const route=useRouter();
+    const {openModel}=useInfoModel();
     return (
         <div className="group bg-zinc-900 col-span-1 relative h-[12vw] ">
             <img
@@ -88,6 +91,28 @@ const MovieCard: React.FC<MovieCardProps> = ({
                             <BsFillPlayFill size={30} />
                         </div>
                         <FavoriteButton movieId={data?.id}/>
+                        <div 
+                        onClick={()=>openModel(data?.id)}
+                        className="
+                        cursor-pointer
+                        border-2
+                        border-white
+                        rounded-full
+                        ml-auto
+                        flex
+                        justify-center
+                        items-center
+                        h-6
+                        w-6
+                        lg:h-10
+                        lg:w-10
+                        transition
+                        group/item
+                        hover:border-neutral-300
+                        "
+                        >
+                            <BiChevronDown size={30} className="text-white group-hover/item:border-neutral-300" />
+                        </div>
                     </div>
                     <p className="text-green-400 font-semibold mt-4">
                         New <span className="text-white">2023</span>

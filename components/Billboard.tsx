@@ -1,9 +1,18 @@
 import useBillboard from "@/hooks/useBillboard";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import PlayButton from "./PlayButton";
+import { useCallback } from "react";
+import useInfoModel from "@/hooks/useInfoModel";
 
 const Billboard = () => {
     const { data } = useBillboard();
+
+    const {openModel}=useInfoModel();
+
+    const handleOpenModel=useCallback(()=>{
+        openModel(data?.id);
+    },[openModel,data?.id])
+
     return (
         <div className="relative h-[56.25vw]">
             <video
@@ -60,7 +69,9 @@ const Billboard = () => {
             gap-3
             ">
                 <PlayButton movieId={data?.id}/>
-                <p className="
+                <button
+                onClick={handleOpenModel}
+                className="
                 bg-white
                 text-white
                 bg-opacity-30
@@ -78,7 +89,7 @@ const Billboard = () => {
                 ">
                 <AiOutlineInfoCircle className="mr-1"/>
                     More Info
-                </p>
+                </button>
             </div>
             </div>
         </div>
