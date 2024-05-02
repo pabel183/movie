@@ -6,7 +6,9 @@ import { useRouter } from "next/router";
 export async function getServerSideProps(context:NextPageContext){
     const session= await getSession(context);
 
-    if(!session){
+    if (session === null || !session) {
+        console.log("profile session");
+        console.log(session);
         return {
             redirect:{
                 destination:"/auth",
@@ -14,7 +16,8 @@ export async function getServerSideProps(context:NextPageContext){
             }
         }
     }
-
+    console.log("profile session");
+    console.log(session);
     return {
         props:{}
     }
