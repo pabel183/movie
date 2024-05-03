@@ -1,31 +1,39 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { NextPageContext } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-export async function getServerSideProps(context:NextPageContext){
-    const session= await getSession(context);
+// export async function getServerSideProps(context:NextPageContext){
+//     const session= await getSession(context);
 
-    if (session === null || !session) {
-        console.log("profile session");
-        console.log(session);
-        return {
-            redirect:{
-                destination:"/auth",
-                permanent:false
-            }
-        }
-    }
-    console.log("profile session");
-    console.log(session);
-    return {
-        props:{}
-    }
-}
+//     if (session === null || !session) {
+//         console.log("profile session");
+//         console.log(session);
+//         return {
+//             redirect:{
+//                 destination:"/auth",
+//                 permanent:false
+//             }
+//         }
+//     }
+//     console.log("profile session");
+//     console.log(session);
+//     return {
+//         props:{}
+//     }
+// }
 
 const Profile=()=>{
-    const router=useRouter();
-    const {data:user}=useCurrentUser();
+     const { data: session } = useSession();
+      const router=useRouter();
+      const {data:user}=useCurrentUser();
+
+    if (!session) {
+        // Redirect to login page if not authenticated
+        router.push('/auth');
+        return null;
+    }
+    
     return(
         <div className="flex items-center h-full justify-center">
             <div className="flex flex-col">
