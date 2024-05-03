@@ -8,7 +8,6 @@ import useInfoModel from "@/hooks/useInfoModel";
 import useMovieList from "@/hooks/useMovieList";
 import { NextPageContext } from "next";
 import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 
 // export async function getServerSideProps(context: NextPageContext){
 //   const session=await getSession(context);
@@ -34,18 +33,22 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const { data: session } = useSession();
-  const router=useRouter();
 
   const {data:movies=[]}=useMovieList();
   const {data:favorites=[]}=useFavorites();
 
   const {isOpen,closeModel}=useInfoModel();
 
-  if (!session) {
-    // Redirect to login page if not authenticated
-    router.push('/auth');
-    return null;
-  }
+  if (!session?.user?.email) {
+    console.log("profile session");
+    console.log(session);
+    return {
+        redirect:{
+            destination:"/auth",
+            permanent:false
+        }
+    }
+}
 
   return (
     <>

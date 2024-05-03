@@ -28,12 +28,19 @@ const Profile=()=>{
       const router=useRouter();
       const {data:user}=useCurrentUser();
 
-    if (!session) {
-        // Redirect to login page if not authenticated
-        router.push('/auth');
-        return null;
-    }
-    
+      console.log(session?.user?.email);
+
+      if (!session?.user?.email) {
+                console.log("profile session");
+                console.log(session);
+                return {
+                    redirect:{
+                        destination:"/auth",
+                        permanent:false
+                    }
+                }
+        }
+
     return(
         <div className="flex items-center h-full justify-center">
             <div className="flex flex-col">
