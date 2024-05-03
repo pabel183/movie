@@ -3,43 +3,9 @@ import { NextPageContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-// export async function getServerSideProps(context:NextPageContext){
-//     const session= await getSession(context);
-
-//     if (session === null || !session) {
-//         console.log("profile session");
-//         console.log(session);
-//         return {
-//             redirect:{
-//                 destination:"/auth",
-//                 permanent:false
-//             }
-//         }
-//     }
-//     console.log("profile session");
-//     console.log(session);
-//     return {
-//         props:{}
-//     }
-// }
-
 const Profile=()=>{
-     const { data: session } = useSession();
       const router=useRouter();
       const {data:user}=useCurrentUser();
-
-      console.log(session?.user?.email);
-
-      if (!session?.user?.email) {
-                console.log("profile session");
-                console.log(session);
-                return {
-                    redirect:{
-                        destination:"/auth",
-                        permanent:false
-                    }
-                }
-        }
 
     return(
         <div className="flex items-center h-full justify-center">
@@ -83,3 +49,23 @@ const Profile=()=>{
 }
 
 export default Profile;
+
+export async function getServerSideProps(context:NextPageContext){
+    const session= await getSession(context);
+
+    if (session === null || !session) {
+        console.log("profile session");
+        console.log(session);
+        return {
+            redirect:{
+                destination:"/auth",
+                permanent:false
+            }
+        }
+    }
+    console.log("profile session");
+    console.log(session);
+    return {
+        props:{}
+    }
+}

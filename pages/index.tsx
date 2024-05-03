@@ -7,48 +7,13 @@ import useFavorites from "@/hooks/useFavorites";
 import useInfoModel from "@/hooks/useInfoModel";
 import useMovieList from "@/hooks/useMovieList";
 import { NextPageContext } from "next";
-import { getSession, useSession } from "next-auth/react";
-
-// export async function getServerSideProps(context: NextPageContext){
-//   const session=await getSession(context);
-
-  
-//   if (session === null || !session) {
-//     console.log("index session");
-//     console.log(session);
-//     return {
-//       redirect: {
-//         destination: '/auth',
-//         permanent: false,
-//       }
-//     }
-//   }
-//   console.log("index session");
-//   console.log(session);
-//   return {
-//     props: {}
-//   }
-
-// };
+import { getSession } from "next-auth/react";
 
 export default function Home() {
-  const { data: session } = useSession();
-
   const {data:movies=[]}=useMovieList();
   const {data:favorites=[]}=useFavorites();
 
   const {isOpen,closeModel}=useInfoModel();
-
-  if (!session?.user?.email) {
-    console.log("profile session");
-    console.log(session);
-    return {
-        redirect:{
-            destination:"/auth",
-            permanent:false
-        }
-    }
-}
 
   return (
     <>
@@ -62,3 +27,23 @@ export default function Home() {
     </>
   );
 }
+
+export async function getServerSideProps(context: NextPageContext){
+  const session=await getSession(context);
+
+  
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
+
+};
+
